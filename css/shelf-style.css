@@ -1,0 +1,57 @@
+.shelf-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.shelf {
+    width: 50%;
+    aspect-ratio: 1/1;
+}
+
+@media screen and (max-width: 767px) {
+    .shelf {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 991px) {
+    .shelf {
+        width: 40%;
+    }
+}
+
+.shelf-row {
+    display: flex;
+    height: calc(100% / 3);
+}
+
+.shelf-cell {
+    flex: 1;
+    margin: 3px;
+    border: 2px solid #1126ca;
+    border-radius: 20px;
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    background-color: white;
+    padding: 0;
+    color: rgb(164, 170, 169);
+}
+
+.shelf-cell:hover {
+    opacity: 0.9;
+}
+
+.shelf-label {
+    display: block;
+    user-select: none;
+}
+
+.custom-spinner {
+    width: 3rem;
+    height: 3rem;
+    border-width: 6px;
+}

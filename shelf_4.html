@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <title>Tình trạng kệ 4</title>
+
+        <!-- Custom fonts for this template-->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet"
+        />
+
+        <!-- Custom styles for this template-->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="./css/shelf-style.css" />
+        <link rel="icon" type="image/png" href="./img/favicon.png" />
+    </head>
+
+    <body id="page-top">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <ul
+                class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+                id="accordionSidebar"
+            >
+                <!-- Sidebar - Brand -->
+                <a
+                    class="sidebar-brand d-flex align-items-center justify-content-center overflow-hidden"
+                    href="index.html"
+                >
+                    <div class="sidebar-brand-icon">
+                        <img
+                            style="width: 100%"
+                            class="logo"
+                            src="./img/logo.png"
+                            alt="Logo trường"
+                        />
+                    </div>
+                </a>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider" />
+
+                <!-- Heading -->
+                <div class="sidebar-heading">Quản lý</div>
+
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-toggle="collapse"
+                        data-target="#history"
+                        aria-expanded="true"
+                        aria-controls="history"
+                    >
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Quản lý kho</span>
+                    </a>
+                    <div
+                        id="history"
+                        class="collapse"
+                        aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar"
+                    >
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Danh mục:</h6>
+                            <a class="collapse-item" href="index.html">
+                                <i class="fas fa-fw fa-table"></i> Tình trạng kho
+                            </a>
+                            <a class="collapse-item" href="import-history.html">
+                                <i class="fas fa-fw fa-table"></i> Lịch sử nhập hàng
+                            </a>
+                            <a class="collapse-item" href="export-history.html">
+                                <i class="fas fa-fw fa-table"></i> Lịch sử xuất hàng
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-toggle="collapse"
+                        data-target="#collapseUtilities"
+                        aria-expanded="true"
+                        aria-controls="collapseUtilities"
+                    >
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Xuất hàng</span>
+                    </a>
+                    <div
+                        id="collapseUtilities"
+                        class="collapse"
+                        aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar"
+                    >
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Danh sách kệ:</h6>
+                            <a class="collapse-item" href="shelf_1.html">
+                                <i class="fas fa-fw fa-folder"></i> Kệ 1
+                            </a>
+                            <a class="collapse-item" href="shelf_2.html">
+                                <i class="fas fa-fw fa-folder"></i> Kệ 2
+                            </a>
+                            <a class="collapse-item" href="shelf_3.html">
+                                <i class="fas fa-fw fa-folder"></i> Kệ 3
+                            </a>
+                            <a class="collapse-item" href="shelf_4.html">
+                                <i class="fas fa-fw fa-folder"></i> Kệ 4
+                            </a>
+
+                            <h6 class="collapse-header">Quản lí:</h6>
+                            <a class="collapse-item" href="export.html">
+                                <i class="fas fa-fw fa-file-export"></i> Xuất hàng
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block" />
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+            </ul>
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white mb-4 shadow d-block">
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button
+                            id="sidebarToggleTop"
+                            class="btn btn-link d-md-none rounded-circle mr-3"
+                        >
+                            <i class="fa fa-bars"></i>
+                        </button>
+
+                        <!-- Header content here -->
+                        <div class="text-center text-primary d-none d-md-block">
+                            <h4 class="mx-4 mb-0 my-2 text-uppercase mx-lg-5 font-weight-bold">
+                                Ứng Dụng Công Nghệ IOT Trong Vận Hành Và Quản Lý Kho
+                            </h4>
+                        </div>
+                    </nav>
+                    <!-- End of Topbar -->
+
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+                        <!-- Page Heading -->
+                        <h1 class="h2 mb-4 text-center text-gray-900 text-uppercase">
+                            Trạng Thái Kệ Số 4
+                        </h1>
+
+                        <div class="shelf-wrapper mb-3">
+                            <div class="shelf">
+                                <div class="shelf-row">
+                                    <button
+                                        id="l41"
+                                        class="shelf-cell"
+                                        title="Thông tin sản phẩm"
+                                        data-html="true"
+                                        data-placement="left"
+                                    >
+                                        <div
+                                            class="custom-spinner spinner-border text-primary"
+                                            role="status"
+                                        >
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                    <button
+                                        id="l42"
+                                        class="shelf-cell"
+                                        title="Thông tin sản phẩm"
+                                        data-html="true"
+                                        data-placement="top"
+                                    >
+                                        <div
+                                            class="custom-spinner spinner-border text-primary"
+                                            role="status"
+                                        >
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                    <button
+                                        id="l43"
+                                        class="shelf-cell"
+                                        title="Thông tin sản phẩm"
+                                        data-html="true"
+                                        data-placement="right"
+                                    >
+                                        <div
+                                            class="custom-spinner spinner-border text-primary"
+                                            role="status"
+                                        >
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="shelf-row">
+                                    <button
+                                        id="l44"
+                                        class="shelf-cell"
+                                        title="Thông tin sản phẩm"
+                                        data-html="true"
+                                        data-placement="left"
+                                    >
+                                        <div
+                                            class="custom-spinner spinner-border text-primary"
+                                            role="status"
+                                        >
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                    <button
+                                        id="l45"
+                                        class="shelf-cell"
+                                        title="Thông tin sản phẩm"
+                                        data-html="true"
+                                    >
+                                        <div
+                                            class="custom-spinner spinner-border text-primary"
+                                            role="status"
+                                        >
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                    <button
+                                        id="l46"
+                                        class="shelf-cell"
+                                        title="Thông tin sản phẩm"
+                                        data-html="true"
+                                        data-placement="right"
+                                    >
+                                        <div
+                                            class="custom-spinner spinner-border text-primary"
+                                            role="status"
+                                        >
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="shelf-row">
+                                    <button
+                                        id="l47"
+                                        class="shelf-cell"
+                                        title="Thông tin sản phẩm"
+                                        data-html="true"
+                                        data-placement="left"
+                                    >
+                                        <div
+                                            class="custom-spinner spinner-border text-primary"
+                                            role="status"
+                                        >
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                    <button
+                                        id="l48"
+                                        class="shelf-cell"
+                                        title="Thông tin sản phẩm"
+                                        data-html="true"
+                                        data-placement="bottom"
+                                    >
+                                        <div
+                                            class="custom-spinner spinner-border text-primary"
+                                            role="status"
+                                        >
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                    <button
+                                        id="l49"
+                                        class="shelf-cell"
+                                        title="Thông tin sản phẩm"
+                                        data-html="true"
+                                        data-placement="right"
+                                    >
+                                        <div
+                                            class="custom-spinner spinner-border text-primary"
+                                            role="status"
+                                        >
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Nhóm nghiên cứu trí tuệ nhân tạo AIT 2024</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+            </div>
+            <!-- End of Content Wrapper -->
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+
+        <script>
+            $(() => {
+                $('.shelf-cell').popover({
+                    trigger: 'focus',
+                });
+            });
+        </script>
+
+        <script type="module">
+            // Config firebase
+            import * as firebase from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
+            import * as firebaseDb from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js';
+
+            const firebaseConfig = {
+                apiKey: 'AIzaSyBz_OrGBUlvGfLd2WadTrGkJ8fNlAklzvg',
+                authDomain: 'project-warehouse-8351f.firebaseapp.com',
+                databaseURL: 'https://project-warehouse-8351f-default-rtdb.firebaseio.com',
+                projectId: 'project-warehouse-8351f',
+                storageBucket: 'project-warehouse-8351f.appspot.com',
+                messagingSenderId: '36202473505',
+                appId: '1:36202473505:web:17df9bfd749231d4fc5b60',
+            };
+
+            const app = firebase.initializeApp(firebaseConfig);
+
+            const database = firebaseDb.getDatabase(app);
+
+            // Do your job
+            const shefvesRef = firebaseDb.ref(database, 'Tổng số hàng hóa 4 loại/Loại 4');
+
+            // Lắng nghe sự kiện thay đổi dữ liệu của node "Tổng số hàng hóa 4 loại/Loại 4"
+            var data = {};
+            firebaseDb.onValue(
+                shefvesRef,
+                (snapshot) => {
+                    if (snapshot.exists()) {
+                        data = snapshot.val();
+                        const existingKeys = Object.keys(data);
+                        document.querySelectorAll('.shelf-cell').forEach((cell, index) => {
+                            const cellId = cell.id;
+                            if (existingKeys.includes(cellId)) {
+                                const info = data[cellId];
+                                $(cell)
+                                    .attr(
+                                        'data-content',
+                                        `
+                                            <strong>Loại:</strong> ${info['Tên sản phẩm']} <br>
+                                            <strong>NSX:</strong> ${info['Ngày sản xuất']}<br>
+                                            <strong>HSD:</strong> ${info['Hạn sử dụng']}<br>
+                                            <strong>Khối lượng:</strong> ${info['Khối lượng']}<br>
+                                        `
+                                    )
+                                    .addClass('bg-gradient-primary text-white')
+                                    .html(`<span class="shelf-label">${index + 1}</span>`);
+                            } else {
+                                $(cell)
+                                    .attr(
+                                        'data-content',
+                                        `
+                                            <strong>Loại:</strong> rỗng<br>
+                                            <strong>NSX:</strong> rỗng<br>
+                                            <strong>HSD:</strong> rỗng<br>
+                                            <strong>Khối lượng:</strong> rỗng<br>
+                                        `
+                                    )
+                                    .removeClass('bg-gradient-primary text-white')
+                                    .html(`<span class="shelf-label">${index + 1}</span>`);
+                            }
+                        });
+                    } else {
+                        console.log('No data available');
+                    }
+                },
+                (error) => {
+                    console.error('Error listening to data changes:', error);
+                }
+            );
+        </script>
+    </body>
+</html>
