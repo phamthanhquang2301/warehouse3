@@ -40,7 +40,7 @@
                         <img
                             style="width: 100%"
                             class="logo"
-                            src="./img/logo.png"
+                            src="./img/logo1.png"
                             alt="Logo trường"
                         />
                     </div>
@@ -336,7 +336,7 @@
 
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
-
+        <script src="js/shelf-cell.js"></script>
         <script>
             $(() => {
                 $('.shelf-cell').popover({
@@ -387,6 +387,7 @@
                                             <strong>NSX:</strong> ${info['Ngày sản xuất']}<br>
                                             <strong>HSD:</strong> ${info['Hạn sử dụng']}<br>
                                             <strong>Khối lượng:</strong> ${info['Khối lượng']}<br>
+                                            <button class="btn btn-primary w-100 mt-2" onclick="exportShelfCell('${cell.id}')">Xuất hàng</button><br>
                                         `
                                     )
                                     .addClass('bg-gradient-primary text-white')
