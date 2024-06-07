@@ -50,7 +50,7 @@
                         <img
                             style="width: 100%"
                             class="logo"
-                            src="./img/logo.png"
+                            src="./img/logo1.png"
                             alt="Logo trường"
                         />
                     </div>
@@ -226,7 +226,7 @@
                                     />
                                     <div class="invalid-feedback">Số lượng không hợp lệ!</div>
                                 </div>
-
+                                
                                 <div class="col col-12 col-md-6 col-lg-4 ml-auto">
                                     <button type="submit" class="btn btn-primary w-100">
                                         Submit
@@ -364,75 +364,64 @@
                         if (snapshot.exists()) {
                             const data = snapshot.val();
                             let isValid = true;
-                            const shelf1_num = Number.parseInt(shelf_1.val());
-                            const shelf2_num = Number.parseInt(shelf_2.val());
-                            const shelf3_num = Number.parseInt(shelf_3.val());
-                            const shelf4_num = Number.parseInt(shelf_4.val());
+                            const shelf1_num = Number.parseInt(shelf_1.val() || 0);
+                            const shelf2_num = Number.parseInt(shelf_2.val() || 0);
+                            const shelf3_num = Number.parseInt(shelf_3.val() || 0);
+                            const shelf4_num = Number.parseInt(shelf_4.val() || 0);
 
                             // Kiểm tra số lượng có hợp lệ hay không
-                            if (shelf1_num !== 0) {
-                                if (shelf1_num > Object.keys(data['Loại 1']).filter(key => key.startsWith('l')).length || shelf1_num < 0 || !hasNodesStartingWithL(data['Loại 1'])) {
-                                    isValid = false;
-                                    shelf_1.removeClass('is-valid').addClass('is-invalid');
-                                } else {
-                                    shelf_1.removeClass('is-invalid').addClass('is-valid');
-                                }
+                            if (shelf1_num > (data['Loại 1'] ? Object.keys(data['Loại 1']).length : 0) || shelf1_num < 0) {
+                                isValid = false;
+                                shelf_1.removeClass('is-valid').addClass('is-invalid');
                             } else {
-                                // Nếu yêu cầu xuất hàng từ kệ 1 là 0, không kiểm tra tính hợp lệ của số lượng hàng
-                                shelf_1.removeClass('is-invalid').removeClass('is-valid');
+                                shelf_1.removeClass('is-invalid').addClass('is-valid');
                             }
 
-                            if (shelf2_num !== 0) {
-                                if (shelf2_num > Object.keys(data['Loại 2']).filter(key => key.startsWith('l')).length || shelf2_num < 0 || !hasNodesStartingWithL(data['Loại 2'])) {
-                                    isValid = false;
-                                    shelf_2.removeClass('is-valid').addClass('is-invalid');
-                                } else {
-                                    shelf_2.removeClass('is-invalid').addClass('is-valid');
-                                }
+                            if (shelf2_num > (data['Loại 2'] ? Object.keys(data['Loại 2']).length : 0) || shelf2_num < 0) {
+                                isValid = false;
+                                shelf_2.removeClass('is-valid').addClass('is-invalid');
                             } else {
-                                // Nếu yêu cầu xuất hàng từ kệ 2 là 0, không kiểm tra tính hợp lệ của số lượng hàng
-                                shelf_2.removeClass('is-invalid').removeClass('is-valid');
+                                shelf_2.removeClass('is-invalid').addClass('is-valid');
                             }
 
-                            if (shelf3_num !== 0) {
-                                if (shelf3_num > Object.keys(data['Loại 3']).filter(key => key.startsWith('l')).length || shelf3_num < 0 || !hasNodesStartingWithL(data['Loại 3'])) {
-                                    isValid = false;
-                                    shelf_3.removeClass('is-valid').addClass('is-invalid');
-                                } else {
-                                    shelf_3.removeClass('is-invalid').addClass('is-valid');
-                                }
+                            if (shelf3_num > (data['Loại 3'] ? Object.keys(data['Loại 3']).length : 0) || shelf3_num < 0) {
+                                isValid = false;
+                                shelf_3.removeClass('is-valid').addClass('is-invalid');
                             } else {
-                                // Nếu yêu cầu xuất hàng từ kệ 3 là 0, không kiểm tra tính hợp lệ của số lượng hàng
-                                shelf_3.removeClass('is-invalid').removeClass('is-valid');
+                                shelf_3.removeClass('is-invalid').addClass('is-valid');
                             }
 
-                            if (shelf4_num !== 0) {
-                                if (shelf4_num > Object.keys(data['Loại 4']).filter(key => key.startsWith('l')).length || shelf4_num < 0 || !hasNodesStartingWithL(data['Loại 4'])) {
-                                    isValid = false;
-                                    shelf_4.removeClass('is-valid').addClass('is-invalid');
-                                } else {
-                                    shelf_4.removeClass('is-invalid').addClass('is-valid');
-                                }
+                            if (shelf4_num > (data['Loại 4'] ? Object.keys(data['Loại 4']).length : 0) || shelf4_num < 0) {
+                                isValid = false;
+                                shelf_4.removeClass('is-valid').addClass('is-invalid');
                             } else {
-                                // Nếu yêu cầu xuất hàng từ kệ 4 là 0, không kiểm tra tính hợp lệ của số lượng hàng
-                                shelf_4.removeClass('is-invalid').removeClass('is-valid');
+                                shelf_4.removeClass('is-invalid').addClass('is-valid');
                             }
 
                             // Nếu số lượng hợp lệ hết thì mới đưa vào đơn hàng
                             if (isValid) {
                                 const orderRef = firebaseDb.ref(database, 'Đơn hàng');
 
-                                const itemIds = [
-                                ...Object.keys(data['Loại 1']).filter(key => key.startsWith('l')).splice(0, shelf1_num),
-                                ...Object.keys(data['Loại 2']).filter(key => key.startsWith('l')).splice(0, shelf2_num),
-                                ...Object.keys(data['Loại 3']).filter(key => key.startsWith('l')).splice(0, shelf3_num),
-                                ...Object.keys(data['Loại 4']).filter(key => key.startsWith('l')).splice(0, shelf4_num),
-                                ];
+                                let itemIds = [];
+
+                                if (data['Loại 1']) {
+                                    itemIds = itemIds.concat(Object.keys(data['Loại 1']).splice(0, shelf1_num));
+                                }
+
+                                if (data['Loại 2']) {
+                                    itemIds = itemIds.concat(Object.keys(data['Loại 2']).splice(0, shelf2_num));
+                                }
+
+                                if (data['Loại 3']) {
+                                    itemIds = itemIds.concat(Object.keys(data['Loại 3']).splice(0, shelf3_num));
+                                }
+
+                                if (data['Loại 4']) {
+                                    itemIds = itemIds.concat(Object.keys(data['Loại 4']).splice(0, shelf4_num));
+                                }
 
                                 let orderInfo = itemIds.reduce((obj, key) => {
-                                    if (key.startsWith("l")) {
-                                        obj[key] = true;
-                                    }
+                                    obj[key] = true;
                                     return obj;
                                 }, {});
 
@@ -459,14 +448,7 @@
                         console.error(error);
                     });
             });
-            const hasNodesStartingWithL = (shelfData) => {
-                for (const key in shelfData) {
-                    if (key.startsWith('l')) {
-                        return true;
-                    }
-                }
-                return false;
-            };
+
             // Hiển thị alert
             function showAlert(content, alertStyle) {
                 $('#myAlert')
@@ -478,18 +460,7 @@
                     $('#myAlert').css('display', 'none');
                 }, 2000); // 2000 milliseconds = 2 seconds
             }
-            // const statusRef = firebase.database().ref('Tình trạng/Trạng thái');
-
-            // // Lắng nghe sự thay đổi trong dữ liệu trên Firebase
-            // statusRef.on('value', (snapshot) => {
-            //     const statusData = snapshot.val(); // Lấy dữ liệu từ snapshot
-
-            //     // Tìm phần tử có id là "status-container" để hiển thị dữ liệu từ Firebase
-            //     const statusContainer = document.getElementById("status-container");
-
-            //     // Cập nhật nội dung của phần tử statusContainer với dữ liệu từ Firebase
-            //     statusContainer.textContent = statusData;
-            // });
+            
 
 
         </script>

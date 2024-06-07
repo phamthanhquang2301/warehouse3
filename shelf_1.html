@@ -40,7 +40,7 @@
                         <img
                             style="width: 100%"
                             class="logo"
-                            src="./img/logo.png"
+                            src="./img/logo1.png"
                             alt="Logo trường"
                         />
                     </div>
@@ -336,7 +336,7 @@
 
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
-
+        <script src="js/shelf-cell.js"></script>
         <script>
             $(() => {
                 $('.shelf-cell').popover({
@@ -367,6 +367,23 @@
             // Do your job
             const shefvesRef = firebaseDb.ref(database, 'Tổng số hàng hóa 4 loại/Loại 1');
 
+            window.exportShelfCell = function exportShelfCell(id) {
+                const orderRef = firebaseDb.ref(database, 'Đơn hàng');
+                firebaseDb
+                    .set(orderRef, { [id]: true })
+                    .then(() => {
+                        alert(
+                            'Thêm sản phẩm vào đơn xuất thành công!',
+                            'alert-success'
+                        );
+                    })
+                    .catch((error) => {
+                        alert(
+                            'Thêm sản phẩm vào đơn xuất thất bại!',
+                            'alert-danger'
+                        );
+                    });
+            }
             // Lắng nghe sự kiện thay đổi dữ liệu của node "Tổng số hàng hóa 4 loại/Loại 1"
             var data = {};
             firebaseDb.onValue(
@@ -387,6 +404,7 @@
                                             <strong>NSX:</strong> ${info['Ngày sản xuất']}<br>
                                             <strong>HSD:</strong> ${info['Hạn sử dụng']}<br>
                                             <strong>Khối lượng:</strong> ${info['Khối lượng']}<br>
+                                            <button class="btn btn-primary w-100 mt-2" onclick="exportShelfCell('${cell.id}')">Xuất hàng</button><br>
                                         `
                                     )
                                     .addClass('bg-gradient-primary text-white')
@@ -404,7 +422,7 @@
                                     )
                                     .removeClass('bg-gradient-primary text-white')
                                     .html(`<span class="shelf-label">${index + 1}</span>`);
-                            }
+                            } 
                         });
                     } else {
                         console.log('No data available');

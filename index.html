@@ -38,7 +38,7 @@
                         <img
                             style="width: 100%"
                             class="logo"
-                            src="./img/logo.png"
+                            src="./img/logo1.png"
                             alt="Logo trường"
                         />
                     </div>
@@ -233,7 +233,9 @@
                     <!-- /.container-fluid -->
                 </div>
                 <!-- End of Main Content -->
-
+                <div id="myPlot" style="width:100%;max-width:700px"></div>
+                
+            
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
@@ -247,7 +249,7 @@
             <!-- End of Content Wrapper -->
         </div>
         <!-- End of Page Wrapper -->
-
+        
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
@@ -262,7 +264,39 @@
 
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="path/to/fetching.js"></script>
+        <script>
+           const xArray = ["Kệ 1", "Kệ 2", "Kệ 3", "Kệ 4"];
+           const yArray = ['shelf1Count', 'shelf2Count', 'shelf3Count', 'shelf4Count'];
+            const data = [{
+                x: xArray,
+                y: yArray,
+                type: "bar",
+                orientation: "v",
+                marker: {color: "rgba(0,0,255,0.6)"}
+            }];
 
+            const layout = {title: "Số lượng hàng trong kho"};
+
+            Plotly.newPlot("myPlot", data, layout);
+        </script>
+        <!-- <script>
+            const xArray = ["Kệ 1", "Kệ 2", "Kệ 3", "Kệ 4"];
+            const yArray = [shelf1Count, shelf2Count, shelf3Count, shelf4Count];
+
+            const chartData = [{
+                x: xArray,
+                y: yArray,
+                type: "bar",
+                orientation: "v",
+                marker: {color: "rgba(0,0,255,0.6)"}
+            }];
+
+            const layout = {title: "Số lượng các loại kệ"};
+
+            Plotly.newPlot("myPlot", chartData, layout);
+        </script> -->
         <script type="module">
             // Config firebase
             import * as firebase from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
@@ -305,7 +339,16 @@
                 console.error('Error listening to data changes:', error);
             }
         );
-
+        // Hàm đếm số mục chứa ký tự 'char' trong loại 'category'
+        function countItemsContainingChar(data, category, char) {
+            let count = 0;
+            for (let item of data[category]) {
+                if (item.includes(char)) {
+                    count++;
+                }
+            }
+            return count;
+        }
         // Hàm cập nhật số nút có chứa ký tự cụ thể trong tên và hiển thị lên kệ tương ứng
         function updateShelfCount(data, shelfType, shelfId, charToFind) {
             let countShelf = 0;
@@ -318,6 +361,54 @@
             }
             $(shelfId).text(countShelf);
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            const shefvesRef = database.ref('/Tổng số hàng hoá 4 loại');
+
+            // Hàm đếm số nút có chứa ký tự 'l' trong tên cho mỗi loại
+            function countShelves(data, type, char) {
+                let count = 0;
+                for (const key in data) {
+                    if (data[key].type === type && data[key].name.includes(char)) {
+                        count++;
+                    }
+                }
+                return count;
+            }
+
+            // Lắng nghe sự thay đổi của dữ liệu
+            shefvesRef.on('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+
+                    const shelf1Count = countShelves(data, 'Loại 1', 'l');
+                    const shelf2Count = countShelves(data, 'Loại 2', 'l');
+                    const shelf3Count = countShelves(data, 'Loại 3', 'l');
+                    const shelf4Count = countShelves(data, 'Loại 4', 'l');
+                    
+                    const xArray = ["Kệ 1", "Kệ 2", "Kệ 3", "Kệ 4"];
+                    const yArray = ['shelf1Count', 'shelf2Count', 'shelf3Count', 'shelf4Count'];
+
+                    const chartData = [{
+                        x: xArray,
+                        y: yArray,
+                        type: "bar",
+                        orientation: "v",
+                        marker: {color: "rgba(0,0,255,0.6)"}
+                    }];
+
+                    const layout = {title: "Số lượng các loại kệ"};
+
+                    Plotly.newPlot("myPlot", chartData, layout);
+        
+                    
+                } else {
+                    console.log('No data available');
+                }
+            }, (error) => {
+                console.error('Error listening to data changes:', error);
+            });
+        });
+        
         </script>
     </body>
 </html>
